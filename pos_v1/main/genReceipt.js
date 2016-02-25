@@ -31,4 +31,8 @@ function countTotal(savedCartItems){
     return receiptItems;
 }
 
-
+function genReceipt(cartItems){
+    var savedCartItems = countSave(cartItems);
+    var receiptItems = countTotal(savedCartItems);
+    return receiptItems;
+}

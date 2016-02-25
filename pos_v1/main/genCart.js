@@ -1,24 +1,7 @@
 function genCart(input){
-    var tempObject = {},
-        tempCartItem = {};
-    var allItems = loadAllItems();
-    var count;
-    var cartItems = [],
-        barcodeProcessResult = [];
-    tempCartItem.amount = 0;
-    barcodeCache = [];
-
-    input.forEach(function(barcode){
-        barcodeCache.push(barcode);
-        if (barcodeCache.indexof(barcode) === -1){
-            allItems.forEach(function(item){
-                if(barcode === item.barcode){
-                    tempCartItem.item = item;
-                    cartItems.push(tempCartItem);
-                }
-            }
-        })
-    })
+    barcodeProcessResult = barcodeProcess(input);
+    cartItems = cartIteration(barcodeProcessResult);
+    return cartItems;
 }
 
 function barcodeProcess(input){
@@ -45,4 +28,22 @@ function barcodeProcess(input){
         }
     });
     return barcodeCount;
+}
+
+function cartIteration(barcodeProcessResult){
+    var allItems = loadAllItems();
+    var cartItems = [];
+    var cartItem = {};
+
+    for(barcode in barcodeProcessResult){
+        allItems.forEach(function(item){
+            if(barcode = item.barcode){
+                cartItem.item = item;
+                cartItem.amount = barcodeProcessResult[barcode];
+                cartItems.push(cartItem);
+                break;
+            }
+        });
+    }
+    return cartItems;
 }

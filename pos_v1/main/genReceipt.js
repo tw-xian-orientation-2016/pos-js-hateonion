@@ -1,0 +1,23 @@
+function countSave(cartItems){
+    var allPromotions = loadPromotions();
+    var savedCartItems = [];
+
+
+    cartItems.forEach(function(cartItem){
+        var receiptItem = {};
+        var save = 0;
+        allPromotions.forEach(function(promotion){
+            for(barcode of promotion.barcodes){
+                if(barcode === cartItem.item.barcode){
+                    save = Math.floor(cartItem.amount / 3) * cartItem.item.price;
+                }
+            }
+        });
+        receiptItem.save = save;
+        receiptItem.cartItem = cartItem;
+        savedCartItems.push(receiptItem);
+    });
+    return savedCartItems;
+}
+
+

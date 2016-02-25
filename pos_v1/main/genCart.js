@@ -18,7 +18,7 @@ function barcodeProcess(input){
             }
         }
         else{
-            var realBarcode = barcode.substr(0,barcode.indexOf('-') - 1);
+            var realBarcode = barcode.substr(0,barcode.indexOf('-'));
             if(realBarcode in barcodeCount){
                 barcodeCount[realBarcode] += parseInt(barcode[barcode.indexOf('-') + 1]);
             }
@@ -33,17 +33,17 @@ function barcodeProcess(input){
 function cartIteration(barcodeProcessResult){
     var allItems = loadAllItems();
     var cartItems = [];
-    var cartItem = {};
 
     for(barcode in barcodeProcessResult){
-        allItems.forEach(function(item){
-            if(barcode = item.barcode){
+        for(item of allItems){
+            if(barcode === item.barcode){
+                var cartItem = {};
                 cartItem.item = item;
                 cartItem.amount = barcodeProcessResult[barcode];
                 cartItems.push(cartItem);
                 break;
             }
-        });
-    }
+        };
+    };
     return cartItems;
 }

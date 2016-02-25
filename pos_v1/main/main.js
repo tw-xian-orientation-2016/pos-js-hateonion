@@ -1,1 +1,5 @@
-//TODO: Please write code in this file.
+function printReceipt(input){
+    var cartItems = genCart(input);
+    var receiptItems = genReceipt(cartItems);
+    printInventory(receiptItems);
+}

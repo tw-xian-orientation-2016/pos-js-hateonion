@@ -1,4 +1,4 @@
-function printReceipt(receiptItems){
+function printInventory(receiptItems){
     var first_line = '***<没钱赚商店>收据***\n';
     var split_line = '----------------------\n';
     var star_line = '**********************';

@@ -29,22 +29,22 @@ describe('genReceipt', function() {
             unit: '瓶',
             price: 3.00},
             amount: 5},
-            total: 15.00,
-            save: 3.00},
+            total: 15,
+            save: 3},
             {cartItem:{item:{barcode: 'ITEM000003',
                 name: '荔枝',
                 unit: '斤',
                 price: 15.00},
                 amount: 2},
-                total: 30.00,
-                save: 0.00},
+                total: 30,
+                save: 0},
                 {cartItem: {item:{barcode: 'ITEM000005',
                     name: '方便面',
                     unit: '袋',
                     price: 4.50},
                     amount: 3},
-                    total: 13.50,
-                    save: 4.50}];
+                    total: 13.5,
+                    save: 4.5}];
         expect(receiptItems).toEqual(correctResult);
     });
 });

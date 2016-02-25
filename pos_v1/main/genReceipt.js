@@ -20,4 +20,15 @@ function countSave(cartItems){
     return savedCartItems;
 }
 
+function countTotal(savedCartItems){
+    var receiptItems = [];
+
+    savedCartItems.forEach(function(savedCartItem){
+        var total = savedCartItem.cartItem.amount * savedCartItem.cartItem.item.price;
+        savedCartItem.total = total;
+        receiptItems.push(savedCartItem);
+    });
+    return receiptItems;
+}
+
 

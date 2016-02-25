@@ -1,4 +1,4 @@
-describe('printInventory', function() {
+describe('printReceipt', function() {
   var receiptItems;
 
   beforeEach(function() {
@@ -29,7 +29,7 @@ describe('printInventory', function() {
 
     spyOn(console, 'log');
 
-    printInventory(receiptItems);
+    printReceipt(receiptItems);
 
     var expectText =
       '***<没钱赚商店>收据***\n' +

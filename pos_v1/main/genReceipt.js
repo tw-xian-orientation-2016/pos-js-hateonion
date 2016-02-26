@@ -1,38 +1,21 @@
-function countSave(cartItems){
+function genReceipt(cartItems) {
   var allPromotions = loadPromotions();
-  var savedCartItems = [];
+  var receiptItems = [];
 
-
-  cartItems.forEach(function(cartItem){
-    var receiptItem = {};
+  cartItems.forEach(function (cartItem) {
     var save = 0;
-    allPromotions.forEach(function(promotion){
-      for(barcode of promotion.barcodes){
-        if(barcode === cartItem.item.barcode){
+
+    allPromotions.forEach(function (promotion) {
+      for (barcode of promotion.barcodes) {
+        if (barcode === cartItem.item.barcode) {
           save = Math.floor(cartItem.amount / 3) * cartItem.item.price;
         }
       }
     });
-    receiptItem.save = save;
-    receiptItem.cartItem = cartItem;
-    savedCartItems.push(receiptItem);
+    var total = cartItem.amount * cartItem.item.price;
+    receiptItems.push({cartItem: cartItem, save: save, total: total});
   });
-  return savedCartItems;
-}
 
-function countTotal(savedCartItems){
-  var receiptItems = [];
-
-  savedCartItems.forEach(function(savedCartItem){
-    var total = savedCartItem.cartItem.amount * savedCartItem.cartItem.item.price;
-    savedCartItem.total = total;
-    receiptItems.push(savedCartItem);
-  });
   return receiptItems;
 }
 
-function genReceipt(cartItems){
-  var savedCartItems = countSave(cartItems);
-  var receiptItems = countTotal(savedCartItems);
-  return receiptItems;
-}

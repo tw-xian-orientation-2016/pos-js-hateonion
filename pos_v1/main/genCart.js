@@ -1,6 +1,6 @@
 function genCart(tags) {
   var barcodeCounts = barcodeCount(tags);
-  var cartItems = genCartItem(barcodeCounts);
+  var cartItems = generateCartItem(barcodeCounts);
   return cartItems;
 }
 
@@ -20,17 +20,14 @@ function barcodeCount(tags) {
   return barcodeCounts;
 }
 
-function genCartItem(barcodeCounts){
+function generateCartItem(barcodeCounts){
   var allItems = loadAllItems();
   var cartItems = [];
 
   for(barcode in barcodeCounts) {
     for(item of allItems) {
       if(barcode === item.barcode) {
-        var cartItem = {};
-        cartItem.item = item;
-        cartItem.amount = barcodeCounts[barcode];
-        cartItems.push(cartItem);
+        cartItems.push({item: item, amount: barcodeCounts[barcode]});
         break;
       }
     };

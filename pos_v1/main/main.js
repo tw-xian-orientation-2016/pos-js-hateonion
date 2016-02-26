@@ -1,5 +1,5 @@
 function printReceipt(input){
-    var cartItems = genCart(input);
-    var receiptItems = genReceipt(cartItems);
-    printInventory(receiptItems);
+  var cartItems = genCart(input);
+  var receiptItems = genReceipt(cartItems);
+  printInventory(receiptItems);
 }

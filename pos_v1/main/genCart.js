@@ -1,6 +1,6 @@
 function genCart(tags) {
   var barcodeCounts = barcodeCount(tags);
-  var cartItems = cartIteration(barcodeCounts);
+  var cartItems = genCartItem(barcodeCounts);
   return cartItems;
 }
 
@@ -20,13 +20,13 @@ function barcodeCount(tags) {
   return barcodeCounts;
 }
 
-function cartIteration(barcodeCounts){
+function genCartItem(barcodeCounts){
   var allItems = loadAllItems();
   var cartItems = [];
 
-  for(barcode in barcodeCounts){
+  for(barcode in barcodeCounts) {
     for(item of allItems) {
-      if(barcode === item.barcode){
+      if(barcode === item.barcode) {
         var cartItem = {};
         cartItem.item = item;
         cartItem.amount = barcodeCounts[barcode];

@@ -1,45 +1,34 @@
-function genCart(input){
-  barcodeProcessResult = barcodeProcess(input);
-  cartItems = cartIteration(barcodeProcessResult);
+function genCart(tags) {
+  barcodeCount = barcodeCount(tags);
+  cartItems = cartIteration(barcodeCount);
   return cartItems;
 }
 
-function barcodeProcess(input){
-  var sortedInput = input.sort();
-  var barcodeCount = {};
+function barcodeCount(tags) {
+  var barcodeCounts = {};
 
-  sortedInput.forEach(function(barcode, index){
-    if(barcode.indexOf('-') === -1){
-      if(barcode in barcodeCount){
-        barcodeCount[barcode]++;
+  tags.forEach(function(currentTag) {
+    var tagFormat = currentTag.split('-');
+    var amount = parseFloat(tagFormat[1]) || 1;
+      if(currentTag in barcodeCounts) {
+        barcodeCounts[tagFormat[0]] += amount;
+      } else {
+        barcodeCounts[tagFormat[0]] = amount;
       }
-      else{
-        barcodeCount[barcode] = 1;
-      }
-    }
-    else{
-      var realBarcode = barcode.substr(0,barcode.indexOf('-'));
-      if(realBarcode in barcodeCount){
-        barcodeCount[realBarcode] += parseInt(barcode[barcode.indexOf('-') + 1]);
-      }
-      else{
-        barcodeCount[realBarcode] =parseInt(barcode[barcode.indexOf('-') + 1]);
-      }
-    }
   });
-  return barcodeCount;
+  return barcodeCounts;
 }
 
-function cartIteration(barcodeProcessResult){
+function cartIteration(barcodeCounts){
   var allItems = loadAllItems();
   var cartItems = [];
 
-  for(barcode in barcodeProcessResult){
-    for(item of allItems){
+  for(barcode in barcodeCounts){
+    for(item of allItems) {
       if(barcode === item.barcode){
         var cartItem = {};
         cartItem.item = item;
-        cartItem.amount = barcodeProcessResult[barcode];
+        cartItem.amount = barcodeCounts[barcode];
         cartItems.push(cartItem);
         break;
       }

@@ -1,6 +1,6 @@
 function genCart(tags) {
-  barcodeCount = barcodeCount(tags);
-  cartItems = cartIteration(barcodeCount);
+  var barcodeCounts = barcodeCount(tags);
+  var cartItems = cartIteration(barcodeCounts);
   return cartItems;
 }
 
@@ -8,12 +8,13 @@ function barcodeCount(tags) {
   var barcodeCounts = {};
 
   tags.forEach(function(currentTag) {
-    var tagFormat = currentTag.split('-');
-    var amount = parseFloat(tagFormat[1]) || 1;
+    var splitTag = currentTag.split('-');
+    var currentBarcode = splitTag[0];
+    var amount = parseFloat(splitTag[1]) || 1;
       if(currentTag in barcodeCounts) {
-        barcodeCounts[tagFormat[0]] += amount;
+        barcodeCounts[currentBarcode] += amount;
       } else {
-        barcodeCounts[tagFormat[0]] = amount;
+        barcodeCounts[currentBarcode] = amount;
       }
   });
   return barcodeCounts;
